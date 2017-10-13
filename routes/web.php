@@ -14,9 +14,14 @@
 Route::get('/', function () {
     return view('welcome');
 });
-
+Route::group(["middleware"=> "auth"],function(){
+  Route::resource('homestay','HomestayController');
+});
 Route::get('/showshome','HomestayController@show');
 Route::get('/show','HomestayController@index');
 
 Route::post('/addhome','HomestayController@store');
-Route::resource('homestay','HomestayController');
+Route::get('/home', 'HomeController@index')->name('home');
+
+Auth::routes();
+Route::get('/show','HomestayController@index');

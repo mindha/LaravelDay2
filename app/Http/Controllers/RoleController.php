@@ -35,7 +35,8 @@ class RoleController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $role= Role:create(["name"=> $request->input("name")]);
+        $role->syncPermissions($request);
     }
 
     /**
@@ -57,7 +58,9 @@ class RoleController extends Controller
      */
     public function edit(Role $role)
     {
-        //
+        $role = Role::find($id);
+        $permission = config ('permission-list');
+        return view('role/edit', '');
     }
 
     /**
